@@ -32,8 +32,7 @@ LLMainWindow::~LLMainWindow() {}
 void LLMainWindow::launchGame() {
     config->saveSettings();
     QProcess p;
-    p.execute("game");
-    if(p.waitForStarted()) {
+    if(p.startDetached("./game")) {
         close();
     } else {
         QMessageBox::critical(this, tr("Critical Error"), tr("Could not execute the %1 program").arg(APPNAME));
